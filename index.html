@@ -9,6 +9,9 @@
     <meta name="auther" content="kumanotetu">
     <link rel='apple-touch-icon' sizes='180x180' href='apple-touch-icon-180x180.png'>
     <link rel="icon" type="image/png" href="icon-192x192.png">
+    <audio id="coke_sound" preload="auto">
+        <source src="audio/coke_sound.wav" type="audio/wav">
+    </audio>
     <link rel='manifest' href='manifest.json'>
     <link rel="stylesheet" type="text/css" media="screen" href="css/brake-setting-tool.css">
     <script src="js/brake-setting-tool.js"></script>
@@ -90,7 +93,10 @@
                 <option value="750">5レーン 45°バンク</option>
             </select>
         </fieldset>
-        <p><input type="button" value="計算" onclick="onClickCalc();"></p>
+        <p>
+            <input type="button" value="計算" onclick="onClickCalc();">
+            <input type="button" value="プシュ" onclick="cokeSound();">
+        </p>
         <fieldset>
             <legend>前後ブレーキ高さ(mm)</legend>
             <ul aria-disabled="true">

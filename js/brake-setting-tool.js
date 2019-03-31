@@ -129,3 +129,8 @@ function calcBrakeSetting() {
     document.getElementById('f-angle').value = Math.round(f_angle * 10) / 10;
     document.getElementById('r-angle').value = Math.round(r_angle * 10) / 10;
 }
+
+/* Open Coke Sound. */
+function cokeSound() {
+    document.getElementById("coke_sound").play();
+}

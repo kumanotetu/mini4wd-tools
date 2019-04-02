@@ -132,5 +132,7 @@ function calcBrakeSetting() {
 
 /* Open Coke Sound. */
 function cokeSound() {
-    document.getElementById("coke_sound").play();
+    let cokeSound = document.getElementById("coke_sound");
+    cokeSound.currentTime = 0;
+    cokeSound.play();
 }

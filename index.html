@@ -13,12 +13,97 @@
         <source src="audio/coke_sound.wav" type="audio/wav">
     </audio>
     <link rel='manifest' href='manifest.json'>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" media="screen" href="css/brake-setting-tool.css">
     <script src="js/brake-setting-tool.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"
+    integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
+    integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd"
+    crossorigin="anonymous"></script>
 </head>
 
 <body onload="init();">
-    <form name="mainForm">
+    <div class="container">
+        <div class="panel-group">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><a>マシンデータ(mm)</a></h3>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="">
+
+                        </div>
+                    </div>
+                    <ul>
+                        <li>
+                            <p>
+                                <label for="wh-base" class="param-name">ホイールベース</label>
+                                <input id="wh-base" class="machine-param" type="number" step="0.1" name="wh-base"
+                                    size="3" value="0" onchange="checkMachineParameter();" />mm
+                                <select id="chassis" name="chassis" onchange="changeChassis();">
+                                    <option value=""></option>
+                                    <option value="80">MA/MS/VS/S2/S1</option>
+                                    <option value="82">AR/TZ/TZ-X</option>
+                                    <option value="83">FM-A/SFM/FM</option>
+                                    <option value="84">SX/SXX</option>
+                                </select>
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                <label for="t-size" class="param-name">タイヤサイズ</label>
+                                <input id="t-size" class="machine-param" type="number" step="0.1" name="t-size" size="3"
+                                    value="0" onchange="checkMachineParameter();" />
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                <label for="f-length" class="param-name">フロント車軸～フロントブレーキ内側まで</label>
+                                <input id="f-length" class="machine-param" type="number" step="0.1" name="f-length"
+                                    size="3" value="0" onchange="checkMachineParameter();" />
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                <label for="f-width" class="param-name">フロントブレーキ縦幅</label>
+                                <input id="f-width" class="machine-param" type="number" step="0.1" name="f-width"
+                                    size="3" value="0" onchange="checkMachineParameter();" />
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                <label for="r-length" class="param-name">リア車軸～リアブレーキ内側まで</label>
+                                <input id="r-length" class="machine-param" type="number" step="0.1" name="r-length"
+                                    size="3" value="0" onchange="checkMachineParameter();" />
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                <label for="r-width" class="param-name">リアブレーキ縦幅</label>
+                                <input id="r-width" class="machine-param" type="number" step="0.1" name="r-width"
+                                    size="3" value="0" onchange="checkMachineParameter();" />
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                <label id="err-message" style="color: red"></label>
+                            </p>
+                        </li>
+                        <li>
+                            <P>
+                                <input id="isCookie" type="checkbox" name="isCookie"
+                                    value="1">Cookieを使用してブラウザにマシンデータを保存する
+                            </P>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--
         <fieldset>
             <legend>マシンデータ(mm)</legend>
             <ul>
@@ -82,51 +167,66 @@
                     </P>
                 </li>
             </ul>
+            
         </fieldset>
-        <fieldset>
-            <legend>計算したいレイアウト</legend>
-            <select id="check-bank" name="check-bank">
-                <option value="680">JCJC バンク</option>
-                <option value="350">JCJC スロープ</option>
-                <option value="400">JCJC LC</option>
-                <option value="1060">5レーン 30°バンク</option>
-                <option value="750">5レーン 45°バンク</option>
-            </select>
-        </fieldset>
-        <p>
-            <input type="button" value="計算" onclick="onClickCalc();">
-            <input type="button" value="プシュ" onclick="cokeSound();">
-        </p>
-        <fieldset>
-            <legend>前後ブレーキ高さ(mm)</legend>
-            <ul aria-disabled="true">
-                <li>
+-->
+    <fieldset>
+        <legend>計算したいレイアウト</legend>
+        <select id="check-bank" name="check-bank">
+            <option value="680">JCJC バンク</option>
+            <option value="350" hidden>JCJC スロープ</option>
+            <option value="400" hidden>JCJC LC</option>
+            <option value="1060" hidden>5レーン 30°バンク</option>
+            <option value="750" hidden>5レーン 45°バンク</option>
+        </select>
+    </fieldset>
+    <div>
+        <button type="button" class="btn btn-success" onclick="onClickCalc();">計算</button>
+    </div>
+    <div>
+        <button type="button" class="btn btn-warning" onclick="cokeSound();">プシュ</button>
+    </div>
+    <fieldset>
+        <legend>前後ブレーキ高さ(mm)</legend>
+        <ul aria-disabled="true">
+            <li>
+                <p>
                     <label for="f-height-out" class="param-name">フロントブレーキ高さ(外側)</label>
                     <input id="f-height-out" type="text" name="f-height-out" size="3" value="0" readonly>
-                </li>
-                <li>
+                </p>
+            </li>
+            <li>
+                <p>
                     <label for="f-height-in" class="param-name">フロントブレーキ高さ(内側)</label>
                     <input id="f-height-in" type="text" name="f-height-in" size="3" value="0" readonly>
-                </li>
-                <li>
+                </p>
+            </li>
+            <li>
+                <p>
                     <label for="f-angle" class="param-name">フロントブレーキ角度(°)</label>
                     <input id="f-angle" type="text" name="f-angle" size="3" value="0" readonly>
-                </li>
-                <li>
+                </p>
+            </li>
+            <li>
+                <p>
                     <label for="r-height-out" class="param-name">リアブレーキ高さ(外側)</label>
                     <input id="r-height-out" type="text" name="r-height-out" size="3" value="0" readonly>
-                </li>
-                <li>
+                </p>
+            </li>
+            <li>
+                <p>
                     <label for="r-height-in" class="param-name">リアブレーキ高さ(内側)</label>
                     <input id="r-height-in" type="text" name="r-height-in" size="3" value="0" readonly>
-                </li>
-                <li>
+                </p>
+            </li>
+            <li>
+                <p>
                     <label for="r-angle" class="param-name">リアブレーキ角度(°)</label>
                     <input id="r-angle" type="text" name="r-angle" size="3" value="0" readonly>
-                </li>
-            </ul>
-        </fieldset>
-    </form>
+                </p>
+            </li>
+        </ul>
+    </fieldset>
 </body>
 
 </html>

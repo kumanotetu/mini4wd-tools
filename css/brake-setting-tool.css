@@ -1,0 +1,11 @@
+li {
+    list-style: none;
+}
+label.param-name {
+    margin-right: 10px;
+    width: 320px;
+    float: left;
+}
+input.machine-param {
+    width: 60px;
+}

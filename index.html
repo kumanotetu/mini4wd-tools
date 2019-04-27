@@ -13,6 +13,22 @@
         <source src="audio/coke_sound.wav" type="audio/wav">
     </audio>
     <link rel='manifest' href='manifest.json'>
+    <script>
+        if ("serviceWorker" in navigator) {
+            if (navigator.serviceWorker.controller) {
+                console.log("[PWA Builder] active service worker found, no need to register");
+            } else {
+                // Register the service worker
+                navigator.serviceWorker
+                    .register("sw.js", {
+                        scope: "./"
+                    })
+                    .then(function (reg) {
+                        console.log("[PWA Builder] Service worker has been registered for scope: " + reg.scope);
+                    });
+            }
+        }
+    </script>
     <link rel="stylesheet" type="text/css" media="screen" href="css/brake-setting-tool.css">
     <script src="js/brake-setting-tool.js"></script>
 </head>
@@ -68,7 +84,7 @@
                     <p>
                         <label for="r-width" class="param-name">リアブレーキ縦幅</label>
                         <input id="r-width" class="machine-param" type="number" step="0.1" name="r-width" size="3"
-                            value="0"onchange="checkMachineParameter();" />
+                            value="0" onchange="checkMachineParameter();" />
                     </p>
                 </li>
                 <li>
@@ -96,6 +112,7 @@
         <p>
             <input type="button" value="計算" onclick="onClickCalc();">
             <input type="button" value="プシュ" onclick="cokeSound();">
+            <!--        <input type="button" value="ログイン" onclick="location.href='./menu.html'">-->
         </p>
         <fieldset>
             <legend>前後ブレーキ高さ(mm)</legend>

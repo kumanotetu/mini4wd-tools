@@ -151,5 +151,7 @@ const calcBrakeSetting = () => {
 
 /* Open Coke Sound. */
 const cokeSound = () => {
-    document.getElementById("coke_sound").play();
+    let cokeSound = document.getElementById("coke_sound");
+    cokeSound.currentTime = 0;
+    cokeSound.play();
 }

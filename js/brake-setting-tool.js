@@ -18,7 +18,7 @@ if (document.cookie != "") {
 }
 
 /* Page OnLoad Event. */
-function init() {
+const init = () => {
     /* Set Machine Parameter in Cookie. */
     document.getElementById('wh-base').value = cookieMap['wh-base'];
     document.getElementById('t-size').value = cookieMap['t-size'];
@@ -40,13 +40,15 @@ function init() {
 }
 
 /* Calc Button OnClick Event. */
-function onClickCalc() {
+const onClickCalc = () => {
+    resetInputParams();
     setCookie();
+    checkMachineParameter();
     calcBrakeSetting();
 }
 
 /* Set Cookie from Machine Parameter. */
-function setCookie() {
+const setCookie = () => {
     let cookieLimit = "";
     let isCookie = document.getElementById('isCookie').value;
     if (isCookie == "1") {
@@ -68,7 +70,7 @@ function setCookie() {
 }
 
 /* Chassis Listbox OnChange Event. */
-function changeChassis() {
+const changeChassis = () => {
     let wh_base = document.getElementById('chassis').value;
     if (wh_base != "") {
         document.getElementById('wh-base').value = wh_base;
@@ -76,7 +78,7 @@ function changeChassis() {
 }
 
 /* Check Machine Parameter. */
-function checkMachineParameter() {
+const checkMachineParameter = () => {
     let errMessage = document.getElementById('err-message');
     errMessage.innerText = "";
 
@@ -86,6 +88,7 @@ function checkMachineParameter() {
     let f_width = parseFloat(document.getElementById('f-width').value);
     let r_length = parseFloat(document.getElementById('r-length').value);
     let r_width = parseFloat(document.getElementById('r-width').value);
+
     if (165 < (wh_base + f_length + f_width + r_length + r_width)) {
         errMessage.innerText = "全長が165mmを超えています";
     } else if (wh_base < 0 || t_size < 0 || f_length < 0 || f_width < 0 || r_length < 0 || r_width < 0) {
@@ -95,8 +98,24 @@ function checkMachineParameter() {
     }
 }
 
+const resetInputParams = () => {
+    resetParam('wh-base');
+    resetParam('t-size');
+    resetParam('f-length');
+    resetParam('f-width');
+    resetParam('r-length');
+    resetParam('r-width');
+}
+const resetParam = (name) => {
+    let param = nullIsZero(document.getElementById(name).value);
+    document.getElementById(name).value = param;
+};
+const nullIsZero = (value) => {
+    return "" == value ? "0" : value;
+};
+
 /* Calc */
-function calcBrakeSetting() {
+const calcBrakeSetting = () => {
     let errLength = document.getElementById('err-message').innerText.length;
     if (errLength > 0) {
         alert("入力値に異常があるため計算しません。");
@@ -112,9 +131,9 @@ function calcBrakeSetting() {
 
     /* Calc height. */
     let f_height_out = check_bank - Math.sqrt((check_bank) ** 2 - (wh_base / 2 + f_length + f_width) ** 2) - (check_bank - (Math.sqrt((check_bank - 2 / t_size) ** 2 - (wh_base / 2) ** 2) + 2 / t_size));
-    let f_height_in  = check_bank - Math.sqrt((check_bank) ** 2 - (wh_base / 2 + f_length) ** 2) - (check_bank - (Math.sqrt((check_bank - 2 / t_size) ** 2 - (wh_base / 2) ** 2) + 2 / t_size));
+    let f_height_in = check_bank - Math.sqrt((check_bank) ** 2 - (wh_base / 2 + f_length) ** 2) - (check_bank - (Math.sqrt((check_bank - 2 / t_size) ** 2 - (wh_base / 2) ** 2) + 2 / t_size));
     let r_height_out = check_bank - Math.sqrt((check_bank) ** 2 - (wh_base / 2 + r_length + r_width) ** 2) - (check_bank - (Math.sqrt((check_bank - 2 / t_size) ** 2 - (wh_base / 2) ** 2) + 2 / t_size));
-    let r_height_in  = check_bank - Math.sqrt((check_bank) ** 2 - (wh_base / 2 + r_length) ** 2) - (check_bank - (Math.sqrt((check_bank - 2 / t_size) ** 2 - (wh_base / 2) ** 2) + 2 / t_size));
+    let r_height_in = check_bank - Math.sqrt((check_bank) ** 2 - (wh_base / 2 + r_length) ** 2) - (check_bank - (Math.sqrt((check_bank - 2 / t_size) ** 2 - (wh_base / 2) ** 2) + 2 / t_size));
 
     /* Calc angle. */
     var rediansToDegrees = (angle) => angle * 180 / Math.PI;
@@ -131,6 +150,6 @@ function calcBrakeSetting() {
 }
 
 /* Open Coke Sound. */
-function cokeSound() {
+const cokeSound = () => {
     document.getElementById("coke_sound").play();
 }

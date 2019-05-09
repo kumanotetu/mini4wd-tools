@@ -1,6 +1,6 @@
 // This is the service worker with the Cache-first network
 
-const CACHE = "pwabuilder-precache";
+const CACHE = "tools_cache_v_0_1_0";
 /* Add an array of files to precache for your app */
 const precacheFiles = [
     "index.html",
@@ -96,4 +96,3 @@ self.addEventListener("install", function (event) {
       return cache.put(request, response);
     });
   }
-  

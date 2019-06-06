@@ -77,6 +77,14 @@ const changeChassis = () => {
     }
 }
 
+/* Tire Listbox OnChange Event. */
+const changeTire = () => {
+    let t_size = document.getElementById('tire').value;
+    if (t_size != "") {
+        document.getElementById('t-size').value = t_size;
+    }
+}
+
 /* Check Machine Parameter. */
 const checkMachineParameter = () => {
     let errMessage = document.getElementById('err-message');

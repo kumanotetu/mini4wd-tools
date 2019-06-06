@@ -64,6 +64,13 @@
                                 <label for="t-size" class="param-name">タイヤサイズ</label>
                                 <input id="t-size" class="machine-param" type="number" step="0.1" name="t-size" size="3"
                                     value="0" />mm
+                                <select id="tire" name="tire" onchange="changeTire();">
+                                    <option value=""></option>
+                                    <option value="26">小径ローハイト</option>
+                                    <option value="24">小径</option>
+                                    <option value="31">大径</option>
+                                    <option value="35">超大型</option>
+                                </select>
                             </p>
                         </li>
                         <li>

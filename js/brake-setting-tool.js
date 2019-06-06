@@ -37,6 +37,12 @@ const init = () => {
     if (chassisArray.indexOf(wh_base) > -1) {
         document.getElementById('chassis').value = wh_base;
     }
+    /* Select Tire Listbox. */
+    let tireArray = ["80", "82", "83", "84"];
+    let t_size = document.getElementById('t-size').value;
+    if (tireArray.indexOf(t_size) > -1) {
+        document.getElementById('tire').value = t_size;
+    }
 }
 
 /* Calc Button OnClick Event. */

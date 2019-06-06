@@ -27,6 +27,10 @@
                     })
                     .then(function (reg) {
                         console.log("[PWA Builder] Service worker has been registered for scope: " + reg.scope);
+                        reg.onupdatefound = function() {
+                            console.log("Update found!");
+                            reg.update();
+                        }
                     });
             }
         }
@@ -187,6 +191,6 @@
             </div>
         </div>
     </div>
-    <span class="label label-default pull-left">v0.2.0</span>
+    <span class="label label-default pull-left">v0.2.1</span>
 </body>
 </html>

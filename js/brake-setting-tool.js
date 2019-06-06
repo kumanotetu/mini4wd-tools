@@ -38,7 +38,7 @@ const init = () => {
         document.getElementById('chassis').value = wh_base;
     }
     /* Select Tire Listbox. */
-    let tireArray = ["80", "82", "83", "84"];
+    let tireArray = ["26", "24", "31", "35"];
     let t_size = document.getElementById('t-size').value;
     if (tireArray.indexOf(t_size) > -1) {
         document.getElementById('tire').value = t_size;
